@@ -20,7 +20,6 @@ architecture launched after 2017.
 
 Deployment: - Any Free Platform(Try to look out for free options.)
 
-Assignment Submission: - Only submit the hosted app link. OR GitHub Link
 
 * Step1: Downloading the dataset ( https://github.com/cvdfoundation/open-images-dataset )
 * step2: Download the annotation (https://storage.googleapis.com/openimages/web/download_v4.html)
