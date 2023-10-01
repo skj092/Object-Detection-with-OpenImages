@@ -100,7 +100,8 @@ if __name__ == "__main__":
     print(f"length of train and valid dataloader are {len(train_dl)} and {len(valid_dl)}")
 
     # to train on gpu if selected.
-    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    #device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    device = torch.device('cpu')
 
 
     num_classes = 599
@@ -110,6 +111,7 @@ if __name__ == "__main__":
 
     # move model to the right device
     model.to(device)
+    print('device is', device)
 
     # construct an optimizer
     params = [p for p in model.parameters() if p.requires_grad]
@@ -123,24 +125,24 @@ if __name__ == "__main__":
 
     # testing on one batch
     images, targets = next(iter(train_dl))
-    images = list(image for image in images)
-    targets = [{k:v for k, v in t.items()} for t in targets]
+    images = list(image.to(device) for image in images)
+    targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
     output = model(images, targets)
     print(output)
-#
 
-#    # training for 10 epochs
-#    num_epochs = 1
-#
-#    for epoch in range(num_epochs):
-#        # training for one epoch
-#        train_one_epoch(model = model,optimizer= optimizer,
-#                        data_loader= train_dl,device= device,epoch = epoch, print_freq=10)
-#        # update the learning rate
-#        lr_scheduler.step()
-#        # evaluate on the test dataset
-#        #evaluate(model, valid_dl, device=device)
-#
+
+    # training for 10 epochs
+    num_epochs = 1
+
+    for epoch in range(num_epochs):
+        # training for one epoch
+        train_one_epoch(model = model,optimizer= optimizer,
+                        data_loader= train_dl,device= device,epoch = epoch, print_freq=10)
+        # update the learning rate
+        lr_scheduler.step()
+        # evaluate on the test dataset
+        #evaluate(model, valid_dl, device=device)
+
 
 
 
