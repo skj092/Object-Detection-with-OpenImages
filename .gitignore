@@ -1,2 +1,6 @@
 *.csv
-train_0/
+__pycache__
+.ipynb_checkpoints
+*.png
+train_0
+*.pkl
